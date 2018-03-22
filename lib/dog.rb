@@ -27,7 +27,7 @@ class Dog
   end
 
   def save
-    if self.id 
+    if self.id
       self.update
     else
       sql = <<-SQL
@@ -47,6 +47,9 @@ class Dog
 
     DB[:conn].execute(sql, self.name, self.id)
   end
+
+  def self.create
+  end 
 
 # This spec will create and insert a dog, and after, it will change the name of the dog instance and call update. The expectations are that after this operation, there is no dog left in the database with the old name. If we query the database for a dog with the new name, we should find that dog and the ID of that dog should be the same as the original, signifying this is the same dog, they just changed their name.
 
