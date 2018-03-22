@@ -48,11 +48,24 @@ class Dog
     DB[:conn].execute(sql, self.name, self.id)
   end
 
-  def self.create(dog_attr)
-    dog = Dog.new(dog_attr)
+  def self.create(row)
+    dog = Dog.new(row)
     dog.save
     dog
   end
+
+  def self.find_by_id(row)
+    row = DB[:conn].execute("SELECT * FROM dogs WHERE id = ?", id)[0]
+    dog = {}
+    dog[:name] = row[1]
+    dog[:breed] = row[2]
+    new_dog = self.new(dog)
+    new_dog.id = row[0]
+    new_dog
+    end
+  end
+
+
 end
 
 
