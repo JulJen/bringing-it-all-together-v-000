@@ -64,6 +64,11 @@ class Dog
     SQL
     result = DB[:conn].execute(sql, id)[0]
 
+  #   DB[:conn].execute(sql, name).map do |row|
+  #     self.new_from_db(row)
+  #   end.first
+  # end
+
     dog = {}
     dog[:id] = result[0]
     dog[:name] = result[1]
