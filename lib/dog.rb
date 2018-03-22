@@ -26,5 +26,12 @@ class Dog
     DB[:conn].execute(sql)
   end
 
+  def save
+  end 
+
+
+  # expect(DB[:conn].execute ("SELECT * FROM dogs WHERE id = 1")).to eq([[1, "Teddy", "cockapoo"]])
+
+
 
 end
