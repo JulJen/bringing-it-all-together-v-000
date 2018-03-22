@@ -70,11 +70,11 @@ class Dog
     #   end.first
     # end
 
-      # dog = {}
-      # dog[:id] = result[0]
-      # dog[:name] = result[1]
-      # dog[:breed] = result[2]
-      # dog = self.new(dog)
+      dog = {}
+      dog[:id] = result[0]
+      dog[:name] = result[1]
+      dog[:breed] = result[2]
+      dog = self.new(dog)
   end
 
 
