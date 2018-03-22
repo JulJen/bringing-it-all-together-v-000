@@ -33,6 +33,7 @@ class Dog
 
 
   def self.new_from_db(row)
+    dog = {}
     dog[:id]= row[0]
     dog[:name] = row[1]
     dog[:breed] = row[2]
