@@ -53,6 +53,7 @@ class Dog
     dog.save
     dog
   end
+end 
 
 
   # takes in a hash of attributes and uses metaprogramming to create a new dog object. Then it uses the save method to save that dog to the database
