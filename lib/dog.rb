@@ -18,10 +18,13 @@ class Dog
         breed TEXT
         )
     SQL
-  end 
+  end
 
   def self.drop_table
-  end 
-  
+    sql = "DROP TABLE IF EXISTS dogs"
+
+    DB[:conn].execute(sql)
+  end
+
 
 end
