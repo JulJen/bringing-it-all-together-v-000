@@ -67,6 +67,9 @@ class Dog
     dog = self.new(dog)
   end
 
+  def self.find_or_create_by
+  end 
+
 
 
 end
