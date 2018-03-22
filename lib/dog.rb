@@ -61,7 +61,11 @@ class Dog
     result = DB[:conn].execute(sql, id)[0]
 
 binding.pry
-    self.new(result[0], result[1], result[2])
+    dog = {}
+    dog[:id] = result[0]
+    dog[:name] = result[1]
+    dog[:breed] = result[2]
+    self.new(dog)
 
     dog = Dog.new(row)
     dog.save
