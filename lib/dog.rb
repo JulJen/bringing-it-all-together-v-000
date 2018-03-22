@@ -64,9 +64,9 @@ class Dog
       WHERE name = ?
       LIMIT 1
     SQL
-    # result = DB[:conn].execute(sql, name)[0]
+    result = DB[:conn].execute(sql, name)[0]
 
-    DB[:conn].execute(sql, name).map do |row|
+    DB[:conn].execute(sql, name).map do |result|
       self.new_from_db(row)
     end.first
   end
