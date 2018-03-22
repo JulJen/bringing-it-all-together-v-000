@@ -33,11 +33,11 @@ class Dog
 
 
   def self.new_from_db(row)
-    dog = {}
-    dog[:id]= row[0]
-    dog[:name] = row[1]
-    dog[:breed] = row[2]
-    dog = self.new(id, name, breed)
+    new_dog = {}
+    new_dog[:id]= row[0]
+    new_dog[:name] = row[1]
+    new_dog[:breed] = row[2]
+    dog = self.new(dog)
   end
 
 
