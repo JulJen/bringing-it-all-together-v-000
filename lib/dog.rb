@@ -6,11 +6,13 @@ class Dog
   attr_accessor :name, :breed
   attr_reader :id
 
+
   def initialize(id:nil, name:, breed:)
     @id = id
     @name = name
     @breed = breed
   end
+
 
   def self.create_table
     sql = <<-SQL
@@ -22,11 +24,21 @@ class Dog
     SQL
   end
 
+
   def self.drop_table
     sql = "DROP TABLE IF EXISTS dogs"
 
     DB[:conn].execute(sql)
   end
+
+
+  def self.new_from_db(row)
+    dog[:id]= row[0]
+    dog[:name] = row[1]
+    dog[:breed] = row[2]
+    self.new(id, name, breed)
+  end
+
 
   def save
     if self.id
@@ -76,16 +88,18 @@ class Dog
     dog = self.new(dog)
   end
 
-  def  self.find_or_create_by(name:, breed:)
-    dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND breed = ?", name, breed)
-    if !dog.empty?
-      dog_data = dog[0]
-      dog = Dog.new(dog_data [0], dog_data [1], dog_data[2])
-    else
-      dog = self.create(name: name, breed: breed)
-    end
-    dog
-  end
+
+
+  # def  self.find_or_create_by(name:, breed:)
+  #   dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND breed = ?", name, breed)
+  #   if !dog.empty?
+  #     dog_data = dog[0]
+  #     dog = self.new(dog_data [0], dog_data [1], dog_data[2])
+  #   else
+  #     dog = self.create(name: name, breed: breed)
+  #   end
+  #   dog
+  # end
 
 
 
