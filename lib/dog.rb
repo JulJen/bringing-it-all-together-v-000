@@ -65,9 +65,7 @@ binding.pry
     dog[:id] = result[0]
     dog[:name] = result[1]
     dog[:breed] = result[2]
-    self.new(dog)
-
-    dog = Dog.new(row)
+    dog = self.new(dog)
     dog.save
     dog
   end
