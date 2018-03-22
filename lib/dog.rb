@@ -57,13 +57,20 @@ class Dog
   end
 
 
+  def self.create(row)
+    dog = Dog.new(row)
+    dog.save
+    dog
+  end
+
+
   def self.find_by_name(name)
     sql = <<-SQL
       SELECT *
       FROM dogs
       WHERE name = ?
     SQL
-  
+
     result = DB[:conn].execute(sql, name)[0]
     dog = {}
     dog[:id] = result[0]
@@ -73,18 +80,6 @@ class Dog
   end
 
 
-  def update
-    sql = "UPDATE dogs SET name = ? WHERE id = ?"
-
-    DB[:conn].execute(sql, self.name, self.id)
-  end
-
-  def self.create(row)
-    dog = Dog.new(row)
-    dog.save
-    dog
-  end
-
   def self.find_by_id(id)
     sql = <<-SQL
       SELECT *
@@ -92,11 +87,6 @@ class Dog
       WHERE id = ?
     SQL
     result = DB[:conn].execute(sql, id)[0]
-
-  #   DB[:conn].execute(sql, name).map do |row|
-  #     self.new_from_db(row)
-  #   end.first
-  # end
 
     dog = {}
     dog[:id] = result[0]
@@ -106,21 +96,22 @@ class Dog
   end
 
 
+  def  self.find_or_create_by(name:, breed:)
+    dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND breed = ?", name, breed)
+    if !dog.empty?
+      dog_data = dog[0]
+      dog = self.new(dog_data [0], dog_data [1], dog_data[2])
+    else
+      dog = self.create(name: name, breed: breed)
+    end
+    dog
+  end
 
-  # def  self.find_or_create_by(name:, breed:)
-  #   dog = DB[:conn].execute("SELECT * FROM dogs WHERE name = ? AND breed = ?", name, breed)
-  #   if !dog.empty?
-  #     dog_data = dog[0]
-  #     dog = self.new(dog_data [0], dog_data [1], dog_data[2])
-  #   else
-  #     dog = self.create(name: name, breed: breed)
-  #   end
-  #   dog
-  # end
 
+  def update
+    sql = "UPDATE dogs SET name = ? WHERE id = ?"
 
+    DB[:conn].execute(sql, self.name, self.id)
+  end
 
 end
-
-
-  # takes in a hash of attributes and uses metaprogramming to create a new dog object. Then it uses the save method to save that dog to the database
