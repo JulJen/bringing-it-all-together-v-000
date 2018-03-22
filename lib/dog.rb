@@ -48,12 +48,12 @@ class Dog
     DB[:conn].execute(sql, self.name, self.id)
   end
 
-  def self.create(name, breed)
+  def self.create(name:, breed:)
     dog = Dog.new(name, breed)
     dog.save
     dog
   end
-end 
+end
 
 
   # takes in a hash of attributes and uses metaprogramming to create a new dog object. Then it uses the save method to save that dog to the database
