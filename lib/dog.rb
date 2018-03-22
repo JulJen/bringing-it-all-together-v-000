@@ -62,7 +62,7 @@ class Dog
 
 binding.pry
     self.new(result[0], result[1], result[2])
-    
+
     dog = Dog.new(row)
     dog.save
     dog
