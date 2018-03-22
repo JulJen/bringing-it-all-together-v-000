@@ -37,7 +37,7 @@ class Dog
     new_dog[:id]= row[0]
     new_dog[:name] = row[1]
     new_dog[:breed] = row[2]
-    dog = self.new(dog)
+    new_dog = self.new(dog)
   end
 
 
