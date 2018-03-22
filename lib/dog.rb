@@ -62,20 +62,14 @@ class Dog
       SELECT *
       FROM dogs
       WHERE name = ?
-      LIMIT 1
     SQL
+  
     result = DB[:conn].execute(sql, name)[0]
-
-    DB[:conn].execute(sql, name).map do |result|
-      self.new_from_db(result)
-    end.first
-  end
-
-      # dog = {}
-      # dog[:id] = result[0]
-      # dog[:name] = result[1]
-      # dog[:breed] = result[2]
-      # dog = self.new(dog)
+    dog = {}
+    dog[:id] = result[0]
+    dog[:name] = result[1]
+    dog[:breed] = result[2]
+    dog = self.new(dog)
   end
 
 
